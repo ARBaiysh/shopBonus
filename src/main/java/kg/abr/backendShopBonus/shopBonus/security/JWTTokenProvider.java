@@ -43,14 +43,20 @@ public class JWTTokenProvider {
                     .setSigningKey(SecurityConstants.SECRET)
                     .parseClaimsJws(token);
             return true;
-        } catch (SignatureException
-                | MalformedJwtException
-                | ExpiredJwtException
-                | UnsupportedJwtException
-                | IllegalArgumentException ex) {
-
-            return false;
+        } catch (SignatureException ex) {
+            log.error("Invalid JWT signature");
+        } catch (MalformedJwtException ex) {
+            log.error("Invalid JWT token");
+        } catch (ExpiredJwtException ex) {
+            log.error("Expired JWT token");
+        } catch (UnsupportedJwtException ex) {
+            log.error("Unsupported JWT token");
+        } catch (IllegalArgumentException ex) {
+            log.error("JWT claims string is empty.");
         }
+        return false;
+
+
     }
 
     public String getUserIdFromToken(String token) {
