@@ -10,7 +10,7 @@
     </parent>
     <groupId>kg.abr.backendShopBonus</groupId>
     <artifactId>shopBonus</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT_DEV</version>
     <name>shopBonus</name>
 
     <description>backend application for shop bonus</description>

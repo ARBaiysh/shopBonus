@@ -3,9 +3,7 @@ package kg.abr.backendShopBonus.shopBonus.security;
 
 import io.jsonwebtoken.*;
 import kg.abr.backendShopBonus.shopBonus.entity.User;
-import kg.abr.backendShopBonus.shopBonus.exceptions.JwtAuthenticationException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
