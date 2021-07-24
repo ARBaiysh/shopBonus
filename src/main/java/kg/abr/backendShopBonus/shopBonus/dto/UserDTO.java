@@ -1,18 +1,15 @@
 package kg.abr.backendShopBonus.shopBonus.dto;
 
+import kg.abr.backendShopBonus.shopBonus.entity.enums.ERole;
+import kg.abr.backendShopBonus.shopBonus.entity.enums.EStatus;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
+import java.util.Set;
 
 @Data
 public class UserDTO {
-
     private String id;
-    @NotEmpty
-    private String firstname;
-    @NotEmpty
-    private String lastname;
     private String username;
-    private String bio;
-
+    private EStatus status;
+    private Set<ERole> roles;
 }

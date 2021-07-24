@@ -3,6 +3,7 @@ package kg.abr.backendShopBonus.shopBonus.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import kg.abr.backendShopBonus.shopBonus.entity.enums.ERole;
+import kg.abr.backendShopBonus.shopBonus.entity.enums.EStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -23,20 +24,11 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String id;
 
-    @Column(nullable = false)
-    private String name;
-
     @Column(unique = true, updatable = false)
     private String username;
 
-    @Column(nullable = false)
-    private String lastname;
-
     @Column(unique = true)
     private String email;
-
-    @Column(columnDefinition = "text")
-    private String bio;
 
     @Column(length = 3000)
     private String password;
@@ -45,6 +37,9 @@ public class User implements UserDetails {
     @CollectionTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"))
     private Set<ERole> roles = new HashSet<>();
+
+    @Enumerated(value = EnumType.STRING)
+    private EStatus status;
 
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -60,11 +55,12 @@ public class User implements UserDetails {
         this.createdDate = LocalDateTime.now();
     }
 
-    public User(String id, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public User(String id, String username, String email, String password, EStatus status, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.status = status;
         this.authorities = authorities;
     }
 
@@ -80,21 +76,21 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return status.equals(EStatus.ACTIVE);
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return status.equals(EStatus.ACTIVE);
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return status.equals(EStatus.ACTIVE);
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return status.equals(EStatus.ACTIVE);
     }
 }

@@ -3,6 +3,7 @@ package kg.abr.backendShopBonus.shopBonus.services;
 import kg.abr.backendShopBonus.shopBonus.dto.UserDTO;
 import kg.abr.backendShopBonus.shopBonus.entity.User;
 import kg.abr.backendShopBonus.shopBonus.entity.enums.ERole;
+import kg.abr.backendShopBonus.shopBonus.entity.enums.EStatus;
 import kg.abr.backendShopBonus.shopBonus.exceptions.UserExistException;
 import kg.abr.backendShopBonus.shopBonus.payload.request.SignUpRequest;
 import kg.abr.backendShopBonus.shopBonus.repository.UserRepository;
@@ -31,21 +32,19 @@ public class UserService {
         } else {
             User user = new User();
             user.setEmail(userIn.getEmail());
-            user.setName(userIn.getFirstname());
-            user.setLastname(userIn.getLastname());
             user.setUsername(userIn.getUsername());
             user.setPassword(passwordEncoder.encode(userIn.getPassword()));
             user.getRoles().add(ERole.ROLE_USER);
+            user.setStatus(EStatus.ACTIVE);
+
             log.info("Saving User {}", userIn.getEmail());
             userRepository.save(user);
         }
     }
 
-    public User updateUser(UserDTO userDTO, Principal principal) {
+    public User updateStatus(UserDTO userDTO, Principal principal) {
         User user = getUserByPrincipal(principal);
-        user.setName(userDTO.getFirstname());
-        user.setLastname(userDTO.getLastname());
-        user.setBio(userDTO.getBio());
+        user.setStatus(userDTO.getStatus());
 
         return userRepository.save(user);
     }
