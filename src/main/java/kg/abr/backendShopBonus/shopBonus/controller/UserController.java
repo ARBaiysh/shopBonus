@@ -55,6 +55,7 @@ public class UserController {
 
         User user = userService.updateStatus(userDTO, principal);
 
+
         UserDTO userUpdated = userFacade.userToUserDTO(user);
         return new ResponseEntity<>(userUpdated, HttpStatus.OK);
     }

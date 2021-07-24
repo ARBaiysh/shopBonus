@@ -46,6 +46,7 @@ public class UserService {
         User user = getUserByPrincipal(principal);
         user.setStatus(userDTO.getStatus());
 
+
         return userRepository.save(user);
     }
 
