@@ -1,0 +1,52 @@
+1 регистрация
+
+Запрос POST http://213.145.151.114:8090/api/auth/signup
+{
+    "email":"qwerqwer@mail.ru",
+    "username":"qwerqwer",
+    "password":"123456789",
+    "confirmPassword":"123456789"
+}
+	
+Ответ status 200
+{
+    "message": "User registered successfully"
+}
+
+2 получить токен
+
+запрос POST http://213.145.151.114:8090/api/auth/signin
+{
+	"username":"qwerqwer@mail.ru",
+    "password":"123456789"
+}
+	
+ответ status 200
+{
+    "success": true,
+    "token": "string token"
+}
+
+3 получить данные текушего ползователя 
+
+запрос GET http://213.145.151.114:8090/api/user/
+Authorization: string token
+
+ответ status 200
+{
+    "id": "71ac1e1d-6df2-4704-adbc-4a95e50dc57c",
+    "username": "dfadf",
+    "status": "ACTIVE"
+}
+
+4 получить данные ползователя по id
+
+запрос GET http://213.145.151.114:8090/api/user/{id}
+Authorization: string token
+ответ status 200
+{
+    "id": "71ac1e1d-6df2-4704-adbc-4a95e50dc57c",
+    "username": "dfadf",
+    "status": "ACTIVE"
+}
+
