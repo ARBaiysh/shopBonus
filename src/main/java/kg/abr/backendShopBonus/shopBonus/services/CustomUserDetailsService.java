@@ -30,6 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return build(user);
     }
 
+
     public static User build(User user) {
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.name()))

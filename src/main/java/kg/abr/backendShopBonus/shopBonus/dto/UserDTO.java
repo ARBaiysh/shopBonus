@@ -12,4 +12,5 @@ public class UserDTO {
     private String username;
     private EStatus status;
     private Set<ERole> roles;
+
 }

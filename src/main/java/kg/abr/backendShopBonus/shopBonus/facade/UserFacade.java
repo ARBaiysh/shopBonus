@@ -16,4 +16,5 @@ public class UserFacade {
         userDTO.setRoles(user.getRoles());
         return userDTO;
     }
+
 }

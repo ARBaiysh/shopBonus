@@ -64,6 +64,7 @@ public class User implements UserDetails {
         this.authorities = authorities;
     }
 
+
     /**
      * SECURITY
      */

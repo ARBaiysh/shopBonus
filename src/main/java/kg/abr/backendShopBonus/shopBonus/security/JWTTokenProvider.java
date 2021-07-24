@@ -35,6 +35,7 @@ public class JWTTokenProvider {
                 .compact();
     }
 
+
     public boolean validateToken(String token) {
         try {
             Jwts.parser()

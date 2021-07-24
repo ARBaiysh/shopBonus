@@ -38,6 +38,7 @@ public class ImageUploadService {
         this.storeRepository = storeRepository;
     }
 
+
     private byte[] compressBytes(byte[] data) {
         Deflater deflater = new Deflater();
         deflater.setInput(data);
