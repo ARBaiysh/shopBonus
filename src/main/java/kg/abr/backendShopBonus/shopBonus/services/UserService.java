@@ -49,7 +49,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-
     public User getCurrentUser(Principal principal) {
         return getUserByPrincipal(principal);
     }
