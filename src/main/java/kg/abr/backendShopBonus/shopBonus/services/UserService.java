@@ -7,6 +7,7 @@ import kg.abr.backendShopBonus.shopBonus.entity.enums.EStatus;
 import kg.abr.backendShopBonus.shopBonus.exceptions.UserExistException;
 import kg.abr.backendShopBonus.shopBonus.payload.request.SignUpRequest;
 import kg.abr.backendShopBonus.shopBonus.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,17 +15,12 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 
-@Service
-@Slf4j
+@Service @RequiredArgsConstructor @Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     public void createUser(SignUpRequest userIn) {
         if (userRepository.existsUserByEmailOrUsername(userIn.getEmail(), userIn.getUsername())) {

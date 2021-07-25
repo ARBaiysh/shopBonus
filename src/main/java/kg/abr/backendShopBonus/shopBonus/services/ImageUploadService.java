@@ -3,6 +3,7 @@ package kg.abr.backendShopBonus.shopBonus.services;
 
 import kg.abr.backendShopBonus.shopBonus.entity.enums.EStatus;
 import kg.abr.backendShopBonus.shopBonus.repository.*;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,7 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 
-@Service
-@Slf4j
+@Service @Slf4j @RequiredArgsConstructor
 public class ImageUploadService {
     private final ImageRepository imageRepository;
     private final AdvertRepository advertRepository;
@@ -24,19 +24,8 @@ public class ImageUploadService {
     private final StoreRepository storeRepository;
 
 
-    public ImageUploadService(ImageRepository imageRepository,
-                              AdvertRepository advertRepository,
-                              CardRepository cardRepository,
-                              ProductAdvertisingRepository productAdvertisingRepository,
-                              ShoppingRepository shoppingRepository,
-                              StoreRepository storeRepository) {
-        this.imageRepository = imageRepository;
-        this.advertRepository = advertRepository;
-        this.cardRepository = cardRepository;
-        this.productAdvertisingRepository = productAdvertisingRepository;
-        this.shoppingRepository = shoppingRepository;
-        this.storeRepository = storeRepository;
-    }
+
+
 
 
     private byte[] compressBytes(byte[] data) {
