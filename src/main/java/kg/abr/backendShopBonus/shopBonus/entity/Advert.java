@@ -18,7 +18,7 @@ public class Advert {
     @Column(unique = true)
     private String id;
 
-    private String productName;
+    private String name;
 
     private double price;
 

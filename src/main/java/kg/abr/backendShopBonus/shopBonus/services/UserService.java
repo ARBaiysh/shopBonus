@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 
-@Service @RequiredArgsConstructor @Slf4j
+@Service
+@RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
@@ -57,7 +59,26 @@ public class UserService {
 
     }
 
+    public User getUserByName(String userName) {
+               return userRepository.findUserByUsername(userName)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found with username " + userName));
+
+    }
+    public User getUserByEmail(String email) {
+        return userRepository.findUserByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found with username " + email));
+
+    }
+
+
     public User getUserById(String id) {
         return userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+
+    public User addRoleToUser(String userId, ERole role) {
+        User user = getUserById(userId);
+        user.getRoles().add(role);
+        userRepository.save(user);
+        return user;
     }
 }

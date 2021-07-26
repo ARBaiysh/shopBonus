@@ -9,6 +9,7 @@ import kg.abr.backendShopBonus.shopBonus.security.JWTTokenProvider;
 import kg.abr.backendShopBonus.shopBonus.security.SecurityConstants;
 import kg.abr.backendShopBonus.shopBonus.services.UserService;
 import kg.abr.backendShopBonus.shopBonus.validations.ResponseErrorValidation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,6 +27,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/auth")
 @PreAuthorize(value = "permitAll()")
+@RequiredArgsConstructor
 public class AuthController {
 
     private final JWTTokenProvider jwtTokenProvider;
@@ -33,15 +35,6 @@ public class AuthController {
     private final ResponseErrorValidation responseErrorValidation;
     private final UserService userService;
 
-    public AuthController(JWTTokenProvider jwtTokenProvider,
-                          AuthenticationManager authenticationManager,
-                          ResponseErrorValidation responseErrorValidation,
-                          UserService userService) {
-        this.jwtTokenProvider = jwtTokenProvider;
-        this.authenticationManager = authenticationManager;
-        this.responseErrorValidation = responseErrorValidation;
-        this.userService = userService;
-    }
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult bindingResult) {
