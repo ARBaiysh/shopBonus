@@ -33,14 +33,22 @@ public class User implements UserDetails {
     @Column(length = 3000)
     private String password;
 
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "user_card",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "card_id") })
+    private Set<Card> cards = new HashSet<>();
+
     @ElementCollection(targetClass = ERole.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"))
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     private Set<ERole> roles = new HashSet<>();
 
     @Enumerated(value = EnumType.STRING)
     private EStatus status;
-
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(updatable = false)
@@ -64,16 +72,10 @@ public class User implements UserDetails {
         this.authorities = authorities;
     }
 
-
-    /**
-     * SECURITY
-     */
-
     @Override
     public String getPassword() {
         return password;
     }
-
 
     @Override
     public boolean isAccountNonExpired() {

@@ -6,6 +6,7 @@ import kg.abr.backendShopBonus.shopBonus.entity.enums.ERole;
 import kg.abr.backendShopBonus.shopBonus.entity.enums.EStatus;
 import kg.abr.backendShopBonus.shopBonus.exceptions.UserExistException;
 import kg.abr.backendShopBonus.shopBonus.payload.request.SignUpRequest;
+import kg.abr.backendShopBonus.shopBonus.repository.CardRepository;
 import kg.abr.backendShopBonus.shopBonus.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,9 +20,9 @@ import java.security.Principal;
 @RequiredArgsConstructor
 @Slf4j
 public class UserService {
-
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final CardRepository cardRepository;
 
 
     public void createUser(SignUpRequest userIn) {
